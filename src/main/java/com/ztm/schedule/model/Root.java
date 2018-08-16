@@ -6,9 +6,9 @@ import java.util.List;
 
 public class Root {
     @JsonProperty("result")
-    private Iterable<Result> results;
+    private List<Result> results;
 
-    public Iterable<Result> getResults() {
+    public List<Result> getResults() {
         return results;
     }
 
