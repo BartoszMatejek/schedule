@@ -2,15 +2,8 @@ package com.ztm.schedule.implementation;
 
 import com.ztm.schedule.client.ZtmClient;
 
-import java.util.Scanner;
-
 public class ZtmImpl implements ZtmClient{
-    private String name;
-    private String line;
-    private String busStopNumber;
-    private String busStopId;
-    private Scanner scanner;
-
+    
     private static String apiKey = "&apikey=d6361ada-beac-4c41-909a-3f261817b25e";
 
     public String getStops(String busStopId, String busStopNumber, String line) {
