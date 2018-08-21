@@ -1,9 +1,12 @@
 package com.ztm.schedule.model;
 
 
-public class Value {
+import com.fasterxml.jackson.annotation.JsonProperty;
 
+public class Value {
+    @JsonProperty("value")
     private String value;
+    @JsonProperty("key")
     private String key;
 
     public String getValue() {
