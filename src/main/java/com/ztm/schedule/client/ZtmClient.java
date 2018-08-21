@@ -1,5 +1,6 @@
 package com.ztm.schedule.client;
 
+
 public interface ZtmClient {
 
     public Object getTimes(String busStopId, String busStopNumber, String line);

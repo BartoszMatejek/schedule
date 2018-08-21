@@ -1,4 +1,7 @@
 package com.ztm.schedule;
+
+import com.ztm.schedule.client.ZtmClient;
+import com.ztm.schedule.implementation.GettingData;
 import com.ztm.schedule.implementation.ZtmImpl;
 import com.ztm.schedule.model.Result;
 import com.ztm.schedule.model.Root;
@@ -22,62 +25,34 @@ public class ScheduleApplication {
 
 	@PostConstruct
 	public void method() {
-		List<String> busStopIdList = new ArrayList<>();
-		List<String> lines = new ArrayList<>();
-		List<String> times = new ArrayList<>();
 
 		Scanner scanner = new Scanner(System.in);
-		Object root = new Root();
 		ZtmImpl ztm = new ZtmImpl();
-		String myStation = scanner.next();
-		String post = "01";
-		String station = null;
-		try{
-			station = URLEncoder.encode(myStation,"UTF-8");
-		}catch (UnsupportedEncodingException e){
+		GettingData gettingData = new GettingData();
+		gettingData.setZtm(ztm);
+		System.out.println("Podaj przystanek");
+		String station = scanner.next();
+		try {
+			String encoded = URLEncoder.encode(station, "UTF-8");
+		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
 
-		System.out.println(ztm.getBusStopId(station));
-		for (Result result: ztm.getBusStopId(station).getResults()) {
-			for(Value value: result.getValues()){
-				if(value.getKey().equals("zespol")){
-					busStopIdList.add(value.getValue());
-				}
-			}
+		gettingData.setStation(station);
+		gettingData.createBusStopIdList();
+		System.out.println("Podaj numer słupka");
+		String busStopNumber = scanner.next();
+		gettingData.setBusStopNumber(busStopNumber);
+		gettingData.createLinesList();
+		System.out.println(gettingData.getLinesList());
+		for (String busStopId: gettingData.getBusStopIdList()) {
+			System.out.println(busStopId);
 		}
-
-		for (String busStopId: busStopIdList) {
-			System.out.println(ztm.getLines(busStopId,post));
-		}
-
-		for(String busStopId: busStopIdList){
-
-		for (Result result: ztm.getLines(busStopId,post).getResults()) {
-			for (Value value : result.getValues()) {
-				if (value.getKey().equals("linia")) {
-					lines.add(value.getValue());
-				}
-			}
-		}
-			for (String line: lines) {
-				System.out.println(line);
-			}
-		}
-		for(String busStopId: busStopIdList) {
-
-			for (Result result : ztm.getTimes(busStopId, post,"1").getResults()) {
-				for (Value value : result.getValues()) {
-					if (value.getKey().equals("czas")) {
-						times.add(value.getValue());
-					}
-				}
-			}
-		}
-
-		for (String time: times) {
+		gettingData.createTimesList();
+		for (String time: gettingData.getTimesList()) {
 			System.out.println(time);
 		}
+
 	}
 }
 

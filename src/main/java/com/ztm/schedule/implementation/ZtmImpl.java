@@ -14,10 +14,6 @@ public class ZtmImpl implements ZtmClient{
 
     }
 
-    public ZtmImpl(Root root){
-        this.root = root;
-    }
-
     public Root getTimes(String busStopId, String busStopNumber, String line) {
 
         String url = "https://api.um.warszawa.pl/api/action/dbtimetable_get/?id=e923fa0e-d96c-43f9-ae6e-60518c9f3238&busstopId="+busStopId+"&busstopNr="+busStopNumber+
