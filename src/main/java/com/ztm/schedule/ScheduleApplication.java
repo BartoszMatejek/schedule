@@ -1,19 +1,13 @@
 package com.ztm.schedule;
 
-import com.ztm.schedule.client.ZtmClient;
 import com.ztm.schedule.implementation.GettingData;
 import com.ztm.schedule.implementation.ZtmImpl;
-import com.ztm.schedule.model.Result;
-import com.ztm.schedule.model.Root;
-import com.ztm.schedule.model.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import javax.annotation.PostConstruct;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 @SpringBootApplication
@@ -48,11 +42,7 @@ public class ScheduleApplication {
 		for (String busStopId: gettingData.getBusStopIdList()) {
 			System.out.println(busStopId);
 		}
-		gettingData.createTimesList();
-		for (String time: gettingData.getTimesList()) {
-			System.out.println(time);
-		}
-
+		
 	}
 }
 

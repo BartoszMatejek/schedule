@@ -12,6 +12,7 @@ public class GettingData {
     private List<String> linesList = new ArrayList<>();
     private List<String> timesList = new ArrayList<>();
     private List<String> directionList = new ArrayList<>();
+    private List<Value> valuesList = new ArrayList<>();
 
     private ZtmImpl ztm;
     private String line;
@@ -115,6 +116,8 @@ public class GettingData {
     public void createTimesList() {
         for (String busStopId : busStopIdList) {
 
+            for(String line: linesList){
+
             for (Result result : ztm.getTimes(busStopId, busStopNumber, line).getResults()) {
                 for (Value value : result.getValues()) {
                     if (value.getKey().equals("czas")) {
@@ -123,8 +126,8 @@ public class GettingData {
                 }
             }
         }
+        }
     }
-
     public void createLinesList() {
 
         for (String busStopId : busStopIdList) {
